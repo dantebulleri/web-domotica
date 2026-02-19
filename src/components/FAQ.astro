@@ -1,0 +1,118 @@
+---
+const faqs = [
+  {
+    pregunta: '¿Son compatibles con las instalaciones eléctricas existentes?',
+    respuesta:
+      'Sí. Nuestros switches WiFi y Zigbee están diseñados para reemplazar interruptores existentes sin modificar el cableado. Trabajan con cajas de 4×4 y 6×4 estándar argentinas. Solo necesitás una línea de neutro disponible en la caja, que en instalaciones post-2000 suele estar presente. Si no hay neutro, tenemos opciones de switches de 2 hilos para algunos casos.',
+  },
+  {
+    pregunta: '¿Qué tan compleja es la instalación para un electricista sin experiencia en domótica?',
+    respuesta:
+      'Cada kit incluye una guía de instalación paso a paso (PDF descargable y video de referencia). El proceso para un switch WiFi Tuya no es muy diferente a cambiar un interruptor convencional. La parte de configuración en app es guiada y en español. En nuestra experiencia, un instalador que nunca tocó domótica tarda entre 20 y 40 minutos en la primera instalación completa.',
+  },
+  {
+    pregunta: '¿Qué garantía tienen los productos?',
+    respuesta:
+      'Los productos tienen garantía de fábrica de 12 meses contra defectos de fabricación. En caso de falla dentro de ese período, coordinamos el reemplazo o reintegro del equipo. La garantía no cubre daños por mala instalación, sobretensión o mal uso. Para instalaciones correctas recomendamos el uso de protección contra sobretensión (DPS) en el tablero.',
+  },
+  {
+    pregunta: '¿En cuánto tiempo recibo el pedido en Rosario?',
+    respuesta:
+      'Para pedidos dentro de Rosario capital, coordinamos entrega en 2 a 5 días hábiles según disponibilidad de stock. Trabajamos con stock en Rosario para los kits más pedidos, pero no garantizamos entrega inmediata para todos los productos en todo momento. Si necesitás un pedido urgente, consultanos antes por disponibilidad real. No prometemos 24 hs de manera estándar.',
+  },
+  {
+    pregunta: '¿Tienen soporte técnico post-venta para dudas de instalación?',
+    respuesta:
+      'Sí. Instaladores del programa partner tienen acceso a un canal de WhatsApp con respuesta en el mismo día en horario hábil (lunes a viernes de 9 a 18 hs, Rosario). Para consultas de primera vez o eventuales, respondemos por el mismo formulario de contacto o email con un plazo de 24 hs hábiles. No tenemos soporte 24/7 ni guardia nocturna.',
+  },
+  {
+    pregunta: '¿Qué pasa si un cliente quiere devolver un producto instalado?',
+    respuesta:
+      'Las devoluciones aplican para productos en su embalaje original y sin uso. Una vez instalado, el producto no puede devolverse bajo el argumento de "no me gustó". Sí procesamos reemplazos si hay defecto de fabricación comprobable. Por eso es importante que el instalador evalúe bien el kit antes de abrirlo y lo explique al cliente final. Si hay duda sobre compatibilidad, consultanos antes de instalar.',
+  },
+];
+---
+
+<section id="faq" class="bg-bgalt py-20">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-3">Preguntas frecuentes</p>
+      <h2 class="font-heading font-bold text-3xl sm:text-4xl text-primary">
+        Las preguntas que siempre<br class="hidden sm:block" /> nos hacen
+      </h2>
+      <p class="mt-4 text-gray-500">
+        Respuestas directas. Si no encontrás lo que buscás, escribinos.
+      </p>
+    </div>
+
+    <!-- FAQ accordion -->
+    <div class="space-y-3" id="faq-container">
+      {faqs.map((faq, i) => (
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors"
+            aria-expanded="false"
+            data-faq-id={i}
+          >
+            <span class="font-heading font-semibold text-primary text-base leading-snug">
+              {faq.pregunta}
+            </span>
+            <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-bgalt flex items-center justify-center transition-transform duration-200">
+              <svg width="16" height="16" fill="none" stroke="#1E2A38" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5">
+            <p class="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
+              {faq.respuesta}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Still have questions -->
+    <div class="text-center mt-10">
+      <p class="text-gray-500 text-sm mb-4">¿Tenés una pregunta que no está acá?</p>
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors text-sm"
+      >
+        Escribinos directamente
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.faq-btn');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const icon = btn.querySelector('.faq-icon') as HTMLElement;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      // Close all others
+      btns.forEach(other => {
+        if (other !== btn) {
+          other.setAttribute('aria-expanded', 'false');
+          const otherAnswer = other.nextElementSibling as HTMLElement;
+          const otherIcon = other.querySelector('.faq-icon') as HTMLElement;
+          otherAnswer?.classList.add('hidden');
+          if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+        }
+      });
+
+      // Toggle current
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      answer?.classList.toggle('hidden');
+      if (icon) icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+  });
+</script>

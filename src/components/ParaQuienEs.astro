@@ -1,0 +1,84 @@
+---
+const perfiles = [
+  {
+    icon: `<svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+    titulo: 'Instaladores eléctricos',
+    descripcion: 'Residencial y comercial. Ampliá tu oferta de servicio sin inversión inicial en stock propio. Comprás por proyecto, con respaldo técnico incluido.',
+    puntos: [
+      'Sin monto mínimo de primera compra',
+      'Guías de instalación específicas',
+      'Soporte por WhatsApp en horario hábil',
+    ],
+  },
+  {
+    icon: `<svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>`,
+    titulo: 'Constructoras y estudios',
+    descripcion: 'Para amenities, unidades premium o diferenciación de proyectos residenciales. Podemos hacer cotizaciones por lote para un conjunto de unidades.',
+    puntos: [
+      'Cotización por volumen',
+      'Integración discreta con obras en curso',
+      'Compatible con cajas eléctricas estándar',
+    ],
+  },
+  {
+    icon: `<svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`,
+    titulo: 'Empresas de seguridad',
+    descripcion: 'Complementá tus instalaciones de alarmas con sensores y automatización domótica. Los kits Zigbee se integran bien con paneles de seguridad existentes.',
+    puntos: [
+      'Sensores de puerta y movimiento incluidos',
+      'Compatible con hubs Zigbee estándar',
+      'Diferenciá tu propuesta comercial',
+    ],
+  },
+];
+---
+
+<section id="para-quien" class="bg-bgalt py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-3">Para quién es</p>
+      <h2 class="font-heading font-bold text-3xl sm:text-4xl text-primary">
+        Soluciones pensadas para<br class="hidden sm:block" /> profesionales del sector
+      </h2>
+      <p class="mt-4 text-gray-500 max-w-xl mx-auto">
+        No vendemos al consumidor final. Trabajamos exclusivamente con instaladores,
+        constructoras y empresas del rubro en Rosario y zona.
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid md:grid-cols-3 gap-6">
+      {perfiles.map(p => (
+        <div class="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
+          <div class="w-12 h-12 bg-primary/8 rounded-xl flex items-center justify-center text-primary mb-5" set:html={p.icon} />
+          <h3 class="font-heading font-bold text-xl text-primary mb-3">{p.titulo}</h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">{p.descripcion}</p>
+          <ul class="mt-auto space-y-2">
+            {p.puntos.map(punto => (
+              <li class="flex items-start gap-2 text-sm text-gray-600">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" fill="none" stroke="#2DBE7E" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                {punto}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-12">
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 bg-primary text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-primary/90 transition-colors text-sm"
+      >
+        Soy instalador – Quiero condiciones
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

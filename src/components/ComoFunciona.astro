@@ -1,0 +1,76 @@
+---
+const pasos = [
+  {
+    numero: '01',
+    icono: `<svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>`,
+    titulo: 'Coordinamos una reunión',
+    descripcion:
+      'Completás el formulario o nos escribís por WhatsApp. En 24 hs hábiles te respondemos para agendar una reunión breve (presencial en Rosario o por videollamada). Vemos tu perfil, el tipo de obras que hacés y qué kits te convienen.',
+  },
+  {
+    numero: '02',
+    icono: `<svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>`,
+    titulo: 'Recibís tu lista de precios B2B',
+    descripcion:
+      'Te mandamos el catálogo completo con precios de canal, condiciones de pago y tiempos de entrega reales. Sin compromisos, sin mínimos de entrada exagerados. Todo por escrito.',
+  },
+  {
+    numero: '03',
+    icono: `<svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+    titulo: 'Instalás, nosotros te bancamos',
+    descripcion:
+      'Pedís los kits por proyecto o en pequeño stock. Nosotros entregamos en Rosario y zona. Si tenés una duda técnica en plena instalación, escribinos y respondemos en el día en horario hábil.',
+  },
+];
+---
+
+<section id="como-funciona" class="bg-bgalt py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-3">Proceso</p>
+      <h2 class="font-heading font-bold text-3xl sm:text-4xl text-primary">
+        Cómo funciona trabajar con nosotros
+      </h2>
+      <p class="mt-4 text-gray-500 max-w-xl mx-auto">
+        Sin trámites complicados. Tres pasos para empezar a ofrecer domótica en tus obras.
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid md:grid-cols-3 gap-8 relative">
+      <!-- Connector line (desktop) -->
+      <div class="hidden md:block absolute top-14 left-[calc(33.33%+1.5rem)] right-[calc(33.33%+1.5rem)] h-0.5 bg-gradient-to-r from-accent/30 to-accent/30" style="background: linear-gradient(90deg, #2DBE7E33 0%, #2DBE7E 50%, #2DBE7E33 100%);"></div>
+
+      {pasos.map((paso, i) => (
+        <div class="relative flex flex-col items-center text-center group">
+          <!-- Step number + icon -->
+          <div class="relative mb-6">
+            <div class="w-20 h-20 rounded-2xl bg-primary text-white flex items-center justify-center shadow-lg group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
+              <div set:html={paso.icono} />
+            </div>
+            <div class="absolute -top-2 -right-2 w-7 h-7 bg-accent text-primary rounded-full flex items-center justify-center text-xs font-bold font-heading shadow">
+              {paso.numero}
+            </div>
+          </div>
+
+          <h3 class="font-heading font-bold text-xl text-primary mb-3">{paso.titulo}</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">{paso.descripcion}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-14">
+      <a
+        href="#contacto"
+        class="inline-flex items-center gap-2 bg-accent text-primary font-semibold px-7 py-3.5 rounded-xl hover:bg-accent/90 transition-colors text-sm"
+      >
+        Empezar ahora – Coordinar reunión
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

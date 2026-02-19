@@ -1,0 +1,168 @@
+---
+// TODO: Reemplazar las imágenes en /public/images/ con las fotos reales de los productos
+const kits = [
+  {
+    id: 'starter',
+    badge: 'Tuya / Smart Life',
+    badgeColor: 'bg-blue-100 text-blue-700',
+    nombre: 'Starter – Iluminación Smart',
+    tagline: 'El punto de entrada para clientes que quieren empezar con domótica sin complicaciones.',
+    descripcion:
+      'Incluye mini switch WiFi Tuya (compatible con cajas estándar), accesorios de montaje, guía de instalación paso a paso y soporte técnico incluido. Sin reemplazar los tomacorrientes ni canalizar.',
+    incluye: [
+      'Mini switch WiFi Tuya (1 canal)',
+      'Accesorios de montaje estándar',
+      'Guía de instalación (PDF + video)',
+      'Soporte técnico post-instalación',
+      'Compatible: Alexa, Google Home, Smart Life',
+    ],
+    imagen: '/images/kit-starter.jpg', // TODO: Reemplazar con foto real
+    imagenAlt: 'Kit Starter Iluminación Smart – switch WiFi Tuya',
+    apto: 'Residencial y pequeño comercio',
+  },
+  {
+    id: 'riego',
+    badge: 'WiFi',
+    badgeColor: 'bg-accent/15 text-green-700',
+    nombre: 'Kit Riego Inteligente WiFi',
+    tagline: 'Automatización de riego por programación o desde el celular, sin necesidad de hub adicional.',
+    descripcion:
+      'Controlador WiFi de riego con temporización, electroválvula de 24V (1 zona) y guía de instalación. El cliente maneja el riego desde la app sin Wi-Fi local obligatorio.',
+    incluye: [
+      'Controlador WiFi de riego (1 zona)',
+      'Electroválvula 24V incluida',
+      'Guía de instalación (PDF + video)',
+      'App compatible: iOS y Android',
+      'Soporte técnico incluido',
+    ],
+    imagen: '/images/kit-riego.jpg', // TODO: Reemplazar con foto real
+    imagenAlt: 'Kit Riego Inteligente WiFi – controlador y electroválvula',
+    apto: 'Jardines, terrazas, amenities',
+  },
+  {
+    id: 'departamento',
+    badge: 'Zigbee',
+    badgeColor: 'bg-purple-100 text-purple-700',
+    nombre: 'Kit Departamento Smart',
+    tagline: 'La solución más completa para departamentos o locales que ya tienen o quieren un hub central.',
+    descripcion:
+      'Hub Zigbee + 2 switches de pared + sensor de puerta + sensor de movimiento + guía de instalación. Mayor alcance, menor latencia y no depende de la red WiFi para los dispositivos finales.',
+    incluye: [
+      'Hub Zigbee (compatible Tuya/Smart Life)',
+      '2 switches de pared Zigbee',
+      'Sensor de apertura de puerta/ventana',
+      'Sensor de movimiento PIR',
+      'Guía de instalación + soporte',
+    ],
+    imagen: '/images/kit-depto.jpg', // TODO: Reemplazar con foto real
+    imagenAlt: 'Kit Departamento Smart – hub Zigbee, switches y sensores',
+    apto: 'Departamentos, oficinas, locales',
+  },
+];
+---
+
+<section id="kits" class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <p class="text-accent font-semibold text-sm uppercase tracking-widest mb-3">Soluciones disponibles</p>
+      <h2 class="font-heading font-bold text-3xl sm:text-4xl text-primary">
+        Kits listos para instalar,<br class="hidden sm:block" /> sin armar desde cero
+      </h2>
+      <p class="mt-4 text-gray-500 max-w-xl mx-auto">
+        Cada kit viene configurado y documentado. Vos lo instalás, el cliente lo usa desde el primer día.
+        Los precios son exclusivos para canal B2B — consultanos para la lista.
+      </p>
+    </div>
+
+    <!-- Kit cards -->
+    <div class="grid md:grid-cols-3 gap-7">
+      {kits.map(kit => (
+        <article class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+          <!-- Image area -->
+          <div class="relative bg-bgalt aspect-[4/3] overflow-hidden">
+            <img
+              src={kit.imagen}
+              alt={kit.imagenAlt}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <!-- Fallback placeholder when image not found -->
+            <div
+              class="absolute inset-0 bg-primary/5 hidden items-center justify-center flex-col gap-2"
+              style="display: none;"
+            >
+              <svg width="48" height="48" fill="none" stroke="#1E2A38" stroke-width="1.2" viewBox="0 0 24 24" opacity="0.3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <span class="text-xs text-gray-400">Imagen del producto</span>
+            </div>
+            <!-- Badge -->
+            <div class="absolute top-3 left-3">
+              <span class={`text-xs font-semibold px-2.5 py-1 rounded-full ${kit.badgeColor}`}>
+                {kit.badge}
+              </span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6 flex flex-col flex-1">
+            <h3 class="font-heading font-bold text-xl text-primary mb-1">{kit.nombre}</h3>
+            <p class="text-sm text-accent font-medium mb-3">{kit.tagline}</p>
+            <p class="text-gray-500 text-sm leading-relaxed mb-5">{kit.descripcion}</p>
+
+            <!-- Incluye -->
+            <div class="mb-6">
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Incluye</p>
+              <ul class="space-y-1.5">
+                {kit.incluye.map(item => (
+                  <li class="flex items-start gap-2 text-sm text-gray-600">
+                    <svg class="flex-shrink-0 mt-0.5" width="14" height="14" fill="none" stroke="#2DBE7E" stroke-width="2.5" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Apto para -->
+            <div class="mt-auto flex items-center justify-between">
+              <div class="text-xs text-gray-400">
+                <span class="font-medium">Apto:</span> {kit.apto}
+              </div>
+            </div>
+
+            <!-- CTA sin precio -->
+            <div class="mt-5 pt-4 border-t border-gray-100">
+              <div class="flex flex-col gap-2">
+                <a
+                  href="#contacto"
+                  class="w-full text-center text-sm font-semibold bg-primary text-white px-4 py-2.5 rounded-xl hover:bg-primary/90 transition-colors"
+                >
+                  Solicitar lista B2B
+                </a>
+                <a
+                  href="/catalogo.pdf"
+                  download
+                  class="w-full text-center text-sm font-medium text-gray-500 hover:text-primary transition-colors py-1"
+                >
+                  Ver en catálogo PDF →
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Bottom note -->
+    <div class="mt-10 text-center">
+      <p class="text-sm text-gray-400">
+        ¿Necesitás una solución diferente o un volumen mayor?
+        <a href="#contacto" class="text-accent font-medium hover:underline">Hablemos y lo armamos.</a>
+      </p>
+    </div>
+  </div>
+</section>
