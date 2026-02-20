@@ -1,12 +1,26 @@
 ---
-// TODO: Reemplazar el número de WhatsApp (actualmente es un placeholder)
-const WA_NUMBER = '5493413407451'; // Formato: 54 + código área sin 0 + número sin 15
+const WA_NUMBER = '5493413407451';
 const WA_LINK = `https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20condiciones%20B2B`;
+
+// Secciones para scroll-spy (en orden de aparición en la página)
+const navLinks = [
+  { href: '#kits',          label: 'Kits' },
+  { href: '#programa',      label: 'Instaladores' },
+  { href: '#como-funciona', label: 'Cómo funciona' },
+  { href: '#faq',           label: 'FAQ' },
+  { href: '#contacto',      label: 'Contacto' },
+];
 ---
 
-<header class="bg-primary sticky top-0 z-50 shadow-md">
+<!--
+  Clases iniciales: bg-primary sólido, sin blur, sin sombra.
+  Al hacer scroll se agrega la clase JS "scrolled" que activa
+  bg-primary/90 + backdrop-blur-md + shadow-md (ver <style> abajo).
+-->
+<header id="site-header" class="sticky top-0 z-50 bg-primary transition-all duration-300">
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
+
       <!-- Logo / Brand -->
       <a href="/" class="flex items-center gap-2 text-white hover:opacity-90 transition-opacity">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -20,16 +34,20 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20informaci%C3
         </span>
       </a>
 
-      <!-- Desktop nav -->
-      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-white/80">
-        <a href="#kits" class="hover:text-white transition-colors">Kits</a>
-        <a href="#programa" class="hover:text-white transition-colors">Instaladores</a>
-        <a href="#como-funciona" class="hover:text-white transition-colors">Cómo funciona</a>
-        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
-        <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
+      <!-- Desktop nav con scroll-spy -->
+      <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            data-nav-link={link.href.slice(1)}
+            class="nav-link px-3 py-1.5 rounded-md text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
       </div>
 
-      <!-- Desktop CTAs -->
+      <!-- Desktop CTAs (siempre visibles) -->
       <div class="hidden md:flex items-center gap-3">
         <a
           href="/catalogo.pdf"
@@ -46,51 +64,158 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20informaci%C3
         </a>
       </div>
 
-      <!-- Mobile menu button -->
-      <button
-        id="mobile-menu-btn"
-        class="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-      >
-        <svg id="icon-open" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-        <svg id="icon-close" class="hidden" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
+      <!-- Mobile: CTA visible + hamburger -->
+      <div class="flex md:hidden items-center gap-2">
+        <a
+          href="#contacto"
+          class="text-xs font-semibold bg-accent text-primary px-3 py-1.5 rounded-lg hover:bg-accent/90 transition-all duration-200"
+        >
+          Reunión
+        </a>
+        <button
+          id="mobile-menu-btn"
+          class="text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <svg id="icon-open" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="hidden" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <!-- Mobile menu -->
+    <!-- Mobile menu desplegable -->
     <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-white/10 mt-2 pt-4">
-      <div class="flex flex-col gap-3 text-sm font-medium text-white/80">
-        <a href="#kits" class="hover:text-white transition-colors py-1">Kits</a>
-        <a href="#programa" class="hover:text-white transition-colors py-1">Instaladores</a>
-        <a href="#como-funciona" class="hover:text-white transition-colors py-1">Cómo funciona</a>
-        <a href="#faq" class="hover:text-white transition-colors py-1">FAQ</a>
-        <a href="#contacto" class="hover:text-white transition-colors py-1">Contacto</a>
-        <div class="flex flex-col gap-2 pt-2 border-t border-white/10">
+      <div class="flex flex-col gap-1 text-sm font-medium text-white/80 mb-3">
+        {navLinks.map(link => (
           <a
-            href="/catalogo.pdf"
-            download
-            class="text-center text-sm font-semibold text-accent border border-accent px-4 py-2 rounded-lg hover:bg-accent hover:text-primary transition-all"
+            href={link.href}
+            class="hover:text-white hover:bg-white/10 transition-colors py-2 px-2 rounded-lg"
           >
-            Descargar catálogo
+            {link.label}
           </a>
-          <a
-            href="#contacto"
-            class="text-center text-sm font-semibold bg-accent text-primary px-4 py-2 rounded-lg hover:bg-accent/90 transition-all"
-          >
-            Coordinar reunión
-          </a>
-        </div>
+        ))}
+      </div>
+      <div class="flex flex-col gap-2 pt-3 border-t border-white/10">
+        <a
+          href="/catalogo.pdf"
+          download
+          class="text-center text-sm font-semibold text-accent border border-accent px-4 py-2.5 rounded-lg hover:bg-accent hover:text-primary transition-all"
+        >
+          Descargar catálogo
+        </a>
+        <a
+          href="#contacto"
+          class="text-center text-sm font-semibold bg-accent text-primary px-4 py-2.5 rounded-lg hover:bg-accent/90 transition-all"
+        >
+          Coordinar reunión
+        </a>
       </div>
     </div>
   </nav>
 </header>
 
+<style>
+  /* Backdrop blur al hacer scroll — clase agregada por JS */
+  #site-header.scrolled {
+    background-color: rgb(30 42 56 / 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 12px rgb(0 0 0 / 0.25);
+  }
+
+  /* Scroll-spy: link activo */
+  .nav-link.active {
+    color: white;
+    background-color: rgb(255 255 255 / 0.12);
+    position: relative;
+  }
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 2px;
+    background-color: #2DBE7E;
+    border-radius: 999px;
+  }
+</style>
+
 <script>
+  // ─── Backdrop blur en scroll ─────────────────────────────────────────────
+  const header = document.getElementById('site-header');
+
+  function updateHeaderScroll() {
+    if (window.scrollY > 20) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+  updateHeaderScroll(); // estado inicial
+
+  // ─── Scroll-spy con IntersectionObserver ─────────────────────────────────
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
+  const sectionIds = ['kits', 'programa', 'como-funciona', 'faq', 'contacto'];
+
+  // Mapa de id → link del nav
+  const linkMap = new Map<string, HTMLAnchorElement>();
+  navLinks.forEach(link => {
+    const id = link.dataset.navLink;
+    if (id) linkMap.set(id, link);
+  });
+
+  // Rastreamos qué sección es más visible en cada momento
+  const visibleSections = new Map<string, number>();
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        if (entry.isIntersecting) {
+          visibleSections.set(id, entry.intersectionRatio);
+        } else {
+          visibleSections.delete(id);
+        }
+      });
+
+      // Encontrar la sección con mayor ratio visible
+      let topId = '';
+      let topRatio = 0;
+      visibleSections.forEach((ratio, id) => {
+        if (ratio > topRatio) { topRatio = ratio; topId = id; }
+      });
+
+      // Actualizar clases active
+      linkMap.forEach((linkEl, id) => {
+        if (id === topId) {
+          linkEl.classList.add('active');
+        } else {
+          linkEl.classList.remove('active');
+        }
+      });
+    },
+    {
+      // Zona de detección: franja central de la pantalla
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    }
+  );
+
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  // ─── Menú mobile ─────────────────────────────────────────────────────────
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   const iconOpen = document.getElementById('icon-open');
@@ -104,12 +229,12 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20informaci%C3
     btn.setAttribute('aria-expanded', String(!isOpen));
   });
 
-  // Cerrar menú al hacer clic en un link
   menu?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       menu.classList.add('hidden');
       iconOpen?.classList.remove('hidden');
       iconClose?.classList.add('hidden');
+      btn?.setAttribute('aria-expanded', 'false');
     });
   });
 </script>
