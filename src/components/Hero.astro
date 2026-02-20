@@ -16,15 +16,14 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20conocer%20la
         </div>
 
         <h1 class="font-heading font-bold text-4xl sm:text-5xl lg:text-5xl xl:text-6xl leading-tight mb-6">
-          Kits domóticos<br />
-          <span class="text-accent">listos para instalar</span><br />
-          en cada obra.
+          Distribución de Soluciones<br />
+          <span class="text-accent">Domóticas para</span><br />
+          Instaladores
         </h1>
 
         <p class="text-white/70 text-lg leading-relaxed mb-8 max-w-xl">
-          Somos tu distribuidor local de soluciones Tuya/Smart Life y Zigbee en Rosario.
-          Condiciones preferenciales para instaladores eléctricos, empresas de seguridad
-          y constructoras. Sin intermediarios, con soporte técnico real.
+          Kits listos para instalar, compatibles con Tuya / Smart Life.
+          Stock local, soporte técnico y garantía.
         </p>
 
         <!-- Stats row -->
@@ -53,23 +52,22 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20conocer%20la
         <!-- CTA buttons -->
         <div class="flex flex-col sm:flex-row gap-3">
           <a
-            href="#contacto"
+            href="#kits"
             class="inline-flex items-center justify-center gap-2 bg-accent text-primary font-semibold px-6 py-3.5 rounded-xl hover:bg-accent/90 transition-all duration-200 text-sm"
+          >
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+            </svg>
+            Ver Kits Disponibles
+          </a>
+          <a
+            href="#contacto"
+            class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/15 transition-all duration-200 text-sm"
           >
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
             </svg>
-            Coordinar reunión
-          </a>
-          <a
-            href="/catalogo.pdf"
-            download
-            class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/15 transition-all duration-200 text-sm"
-          >
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-            </svg>
-            Descargar catálogo PDF
+            Coordinar Reunión
           </a>
           <a
             href={WA_LINK}
@@ -103,9 +101,9 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20conocer%20la
             </div>
             <div class="space-y-3">
               {[
-                { name: 'Starter – Iluminación Smart', badge: 'Tuya WiFi', color: 'bg-blue-500/20 text-blue-300' },
-                { name: 'Kit Riego Inteligente', badge: 'WiFi', color: 'bg-accent/20 text-accent' },
-                { name: 'Kit Departamento Smart', badge: 'Zigbee', color: 'bg-purple-500/20 text-purple-300' },
+                { name: 'Kit Iluminación Inteligente – Instalador Pro', badge: 'Tuya WiFi', color: 'bg-blue-500/20 text-blue-300' },
+                { name: 'Kit Riego Automático WiFi – Residencial', badge: 'WiFi', color: 'bg-accent/20 text-accent' },
+                { name: 'Kit Departamento Smart – Pack Inicial', badge: 'Zigbee', color: 'bg-purple-500/20 text-purple-300' },
               ].map(kit => (
                 <div class="flex items-center justify-between bg-white/5 rounded-xl px-4 py-3">
                   <span class="text-white/80 text-sm">{kit.name}</span>
